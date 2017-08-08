@@ -10,7 +10,17 @@ export default new Router({
     },
     {
       path: '/readme',
-      component: resolve => require(['../components/common/Home.vue'], resolve)
+      component: resolve => require(['../components/common/Home.vue'], resolve),
+      // 要注意，以 / 开头的嵌套路径会被当作根路径。 这让你充分的使用嵌套组件而无须设置嵌套的路径。
+      children: [{
+          path: '/',
+          component: resolve => require(['../components/page/Readme.vue'], resolve)
+        },
+        {
+          path: '/basetable',
+          component: resolve => require(['../components/page/BaseTable.vue'], resolve)
+        }
+      ]
     },
     {
       path: '/login',

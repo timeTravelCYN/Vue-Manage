@@ -4,11 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { Navbar, TabItem } from 'mint-ui';
-import { InfiniteScroll } from 'mint-ui';
+// import { InfiniteScroll } from 'mint-ui';
 import { Spinner } from 'mint-ui';
 import './assets/css/reset.scss';
+import { Loadmore } from 'mint-ui';
 
-Vue.use(InfiniteScroll);
+Vue.component(Loadmore.name, Loadmore);
+// Vue.use(InfiniteScroll);
 Vue.component(Spinner.name, Spinner);
 Vue.component(Navbar.name, Navbar);
 Vue.component(TabItem.name, TabItem);

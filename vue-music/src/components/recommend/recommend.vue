@@ -1,13 +1,13 @@
 <template>
   <div class="recommend">
-    <Scroll class="recommend-content" :data="descList">
+    <Scroll class="recommend-content" :data="descList" ref="scroll">
       <div>
         <div class="slider-wrapper">
           <div class="slider-content" v-if="recommends.length">
             <slider>
               <div v-for="item in recommends">
                 <a :href="item.linkUrl">
-                  <img :src="item.picUrl" alt="">
+                  <img @load="loadImage" :src="item.picUrl" alt="" class="needsclick">
                 </a>
               </div>
             </slider>
@@ -18,7 +18,7 @@
           <ul>
             <li v-for="item in descList" class="item">
               <div class="icon">
-                <img :src="item.imgurl" width="60" height="60" alt="">
+                <img v-lazy="item.imgurl" width="60" height="60" alt="">
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -27,6 +27,9 @@
             </li>
           </ul>
         </div>
+      </div>
+      <div class="loading-container" v-show="!descList.length">
+        <loading></loading>
       </div>
     </Scroll>
   </div>
@@ -37,6 +40,7 @@ import Scroll from 'base/scroll/scroll'
 import Slider from 'base/slider/slider'
 import { getRecommend, getDiscList } from 'api/recommend'
 import { ERR_OK } from 'api/config'
+import Loading from 'base/loading/loading'
 export default {
   name: 'recommend',
   data() {
@@ -51,7 +55,8 @@ export default {
   },
   components: {
     Slider,
-    Scroll
+    Scroll,
+    Loading
   },
   methods: {
     _getRecommend() {
@@ -69,6 +74,13 @@ export default {
           this.descList = res.data.list
         }
       })
+    },
+    loadImage() {
+      if (!this.checkLoaded) {
+        this.$refs.scroll.refresh()
+        this.checkLoaded = true
+      }
+
     }
   }
 }

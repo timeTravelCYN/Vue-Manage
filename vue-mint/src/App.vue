@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <!-- <mt-navbar v-model="selected" @click.native="changeRouter">
-        <mt-tab-item id="flyer"  type="flyer">
-          创意传单
-        </mt-tab-item>
-        <mt-tab-item id="poster"  type="poster">
-          音乐画报
-        </mt-tab-item>
-        <mt-tab-item id="enroll"  type="enroll">
-          手机官网
-        </mt-tab-item>
-      </mt-navbar> -->
+          <mt-tab-item id="flyer"  type="flyer">
+            创意传单
+          </mt-tab-item>
+          <mt-tab-item id="poster"  type="poster">
+            音乐画报
+          </mt-tab-item>
+          <mt-tab-item id="enroll"  type="enroll">
+            手机官网
+          </mt-tab-item>
+        </mt-navbar> -->
     <router-view></router-view>
   </div>
 </template>
@@ -43,6 +43,11 @@ export default {
 </script>
 
 <style lang="scss">
-#app {width: 100%; height: 100%; overflow: hidden}
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch
+}
 </style>
 

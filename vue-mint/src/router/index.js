@@ -9,6 +9,10 @@ export default new Router({
       redirect: '/flyer'
     },
     {
+      path: '/test',
+      component: resolve => require(['../page/Test.vue'], resolve),
+    },
+    {
       path: '/data',
       component: resolve => require(['../page/Data.vue'], resolve),
     },

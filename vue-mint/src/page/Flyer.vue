@@ -3,7 +3,10 @@
     <!-- <router-link to="data">data</router-link> -->
     <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
       <div class="guanggao">
-        <router-link to="data">固定运营位</router-link>
+        <img src="../assets/images/flyer.jpg" alt="">
+      </div>
+      <div class="commonTem">
+        <div class="commonTitle"></div>
       </div>
       <ul class="page-loadmore-list">
         <li v-for="item in list" class="page-loadmore-listitem" @click="changeUrl">{{ item }}</li>
@@ -25,14 +28,13 @@ export default {
     return {
       list: [],
       allLoaded: false,
-      bottomStatus: ''
+      bottomStatus: '',
     }
   },
   methods: {
     changeUrl() {
       sessionStorage.setItem('flyerTop', this.$refs.flyer.scrollTop)
       sessionStorage.setItem('flyerList', JSON.stringify(this.list))
-      alert(this.$refs.flyer.scrollTop)
       location.href = 'http://flyer.bbtree.com/m/flyer/mobile.html?fid=323&uid=100099155&sid=100033910&s=2'
     },
     handleBottomChange(status) {
@@ -57,13 +59,17 @@ export default {
       this.list.push(i);
     }
   },
+  mounted() {
+  },
   activated() {
-    if (sessionStorage.getItem('flyerList')) this.list = JSON.parse(sessionStorage.getItem('flyerList'))
-    this.$nextTick(() => {
-      const top = sessionStorage.getItem('flyerTop')
-      const _self = this;
-      this.$refs.flyer.scrollTop = top
-    })
+    if (sessionStorage.getItem('flyerList')) {
+      this.list = JSON.parse(sessionStorage.getItem('flyerList'))
+      this.$nextTick(() => {
+        const top = sessionStorage.getItem('flyerTop')
+        const _self = this;
+        this.$refs.flyer.scrollTop = top
+      })
+    }
   },
   beforeRouteLeave(to, from, next) {
     // 导航离开该组件的对应路由时调用
@@ -80,11 +86,13 @@ export default {
   height: 100%;
   overflow: scroll;
   .guanggao {
-    height: 300px;
-    text-align: center;
-    line-height: 300px;
-    background-color: #32c296;
-    color: #ffffff;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  .commonTem {
+    height: 1rem;
   }
   .mint-spinner {
     display: inline-block;

@@ -13,6 +13,10 @@ export default new Router({
       component: resolve => require(['../page/Test.vue'], resolve),
     },
     {
+      path: '/previewPoster',
+      component: resolve => require(['page/previewPoster/previewPoster'], resolve),
+    },
+    {
       path: '/data',
       component: resolve => require(['../page/Data.vue'], resolve),
     },
@@ -29,7 +33,7 @@ export default new Router({
         },
         {
           path: '/enroll',
-          component: resolve => require(['../page/Enroll.vue'], resolve),
+          component: resolve => require(['../page/enroll/Enroll.vue'], resolve),
         }
       ]
     },
